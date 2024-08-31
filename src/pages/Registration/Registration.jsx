@@ -1,9 +1,26 @@
 import { Link } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const Registration = () => {
+  const { createUser } = useContext(AuthContext);
   const handelRegistration = (e) => {
     e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    const name = form.get("name");
+    const email = form.get("email");
+    const url = form.get("url");
+    const password = form.get("password");
+    console.log(name, email, password,url);
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div>
@@ -32,7 +49,7 @@ const Registration = () => {
                 <span className="label-text">URL</span>
               </label>
               <input
-                type="email"
+                type="text"
                 name="url"
                 placeholder="url"
                 className="input input-bordered"
@@ -63,10 +80,15 @@ const Registration = () => {
                 required
               />
               {/* terms */}
-          <div className="mt-4 ">
-          <input className="mr-2" type="checkbox" name="terms" id="terms" />
-          <label htmlFor="terms">Accept Our condition</label>
-          </div>
+              <div className="mt-4 ">
+                <input
+                  className="mr-2"
+                  type="checkbox"
+                  name="terms"
+                  id="terms"
+                />
+                <label htmlFor="terms">Accept Our condition</label>
+              </div>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Registration</button>
