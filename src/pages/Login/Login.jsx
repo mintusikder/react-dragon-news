@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import NavBar from "../Shared/NavBar/NavBar";
-import { useState } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
-  const { signInUser } = useState(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const handelLogin = (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
