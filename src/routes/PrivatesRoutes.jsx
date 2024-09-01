@@ -12,7 +12,7 @@ const PrivatesRoutes = ({children}) => {
     if(loading) {
         return <span className="loading loading-spinner loading-lg"></span>
     }
-    return <Navigate to="/login"></Navigate>
+    return <Navigate state={loading.pathname} to="/login"></Navigate>
 };
 
 export default PrivatesRoutes;
